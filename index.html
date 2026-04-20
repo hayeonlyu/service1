@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500&display=swap" rel="stylesheet">
+    <style>
+
+.font {
+  font-family: "Chakra Petch", sans-serif;
+  font-weight: 500;
+  font-style: normal;
+}
+        body,h1,h2,p,ul,li{margin:0;padding:0; line-height: 150%;}
+
+        section{padding: 20px; 0px;}
+
+        header{padding: 0px; 0px;}
+
+       section{overflow: hidden;}
+
+       body{padding-top: 50px;}
+
+       header{
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        z-index: 1000;
+       }
+    
+        .contents
+            {width: 1200px;
+            background-color: rgb(234, 234, 234);
+            margin: auto;
+            padding: 70px; 
+            position: relative;}
+
+        .mcontents
+            {width: 1500px;
+            background-color: rgb(234, 234, 234);
+            margin: auto;
+            padding: 50px; 50px;
+            position: relative;}
+        
+        
+
+        .bcontents
+            {width: 1000px;
+           
+            margin: auto;
+            padding: 50px; 50px;
+            position: relative;}
+
+
+        
+        img{display: block;}
+        
+
+
+        .flex{display: flex;
+                justify-content: space-between; width:100%;}
+        .logo{
+
+                padding: 20px 20px;
+                font-size: 30px;
+                font-family: "Chakra Petch", sans-serif;
+                font-weight: 700;
+                font-style: normal;}
+        .menu{
+                display: flex;
+                font-size: 30px;
+            }
+        li{list-style-type: none;
+        font-family: "Chakra Petch", sans-serif;
+        font-weight: 700;
+        font-style: normal;}
+        a{display:block; 
+            
+            padding:10px;
+            color: rgb(17, 0, 255);}
+        a:hover{background: rgb(255, 255, 255);
+                color: rgb(0, 0, 0);}
+        .maintitle{text-align: center; font-size: 4em;}
+
+
+        .pic{background: url(1st.png);
+            background-size:100%;
+            background-color: black;
+            display: flex;
+            justify-content: center;
+            background-attachment: fixed;
+            align-content: center;
+		    padding: 600px 0px;}
+
+        .pic2{background: url(nureal.png);
+            background-size:100%;
+            background-color: black;
+            display: flex;
+            justify-content: center;
+            align-content: center;
+		    padding: 400px 0px;}
+        
+        .center{text-align: center;}
+        .left{text-align: left;}
+        .right{text-align: right;}
+
+        .video{width: 1000px;}
+
+
+
+    .moving-box {
+    /* Key animation properties */
+    justify-content: center;
+    margin: auto;
+    width: 4000px;
+    animation-name: slide;
+    animation-duration: 2s;
+    animation-iteration-count: infinite;
+    animation-direction: alternate; /* Moves back and forth */
+    animation-timing-function: ease-in-out;}
+
+    @keyframes slide {
+    from { transform: translateX(-1400px); }
+    to { transform: translateX(-200px); }
+    }
+
+
+    .repel-title {
+    display: flex;
+    flex-direction: column; /* 이거 추가 */
+    flex-wrap: wrap;
+    font-size: 10rem;
+    line-height: 150px;
+    color: blue;
+    user-select: none;}
+    .repel-char {
+    display: inline-block;
+    transition: transform 0.15s ease-out;
+    cursor: default;}
+
+
+
+    .footer{line-height: 50px;}
+    .box
+        {width: 200px; height: 40px;
+        background-color: rgb(210, 210, 210);
+        padding: 10px 20px;
+        border: 2px solid black;
+        border-radius: 15px;
+        display: block;}
+
+
+</style>
+
+
+</head>
+
+<!--시작 -->
+
+<body style="background-color: rgb(234, 234, 234);">
+    <header>
+        <nav>
+            <div class="flex">
+            <div class="logo" style="color: blue;">CUSTOM AG</div>
+                <ul class="menu">
+                    <li class="item">
+                        <a href="">About</a>
+                    </li>
+
+                    <li class="item">
+                        <a href="">Plans</a>
+                    </li>
+
+                    <li class="item">
+                        <a href="">Login</a>
+                    </li>
+
+                    <li class="item">
+                        <a href="">CUSTOM</a>
+                    </li>
+
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+
+    <section style="background-color: rgb(234, 234, 234);">
+        <div class="mcontents repel-title font" id="title"></div>
+            
+            <script>
+            const text = ["CUSTOM", "ALGORITHM"];
+            const titleEl = document.getElementById("title");
+
+            text.forEach(line => {
+                const lineDiv = document.createElement("div");
+                lineDiv.style.display = "flex";
+                
+                line.split("").forEach(ch => {
+                    const span = document.createElement("span");
+                    span.className = "repel-char";
+                    span.textContent = ch;
+                    lineDiv.appendChild(span);
+                });
+                
+                titleEl.appendChild(lineDiv);
+                });
+            const chars = document.querySelectorAll(".repel-char");
+            const RADIUS = 100;   
+            const STRENGTH = 80;  
+
+            document.addEventListener("mousemove", e => {
+                chars.forEach(char => {
+                const rect = char.getBoundingClientRect();
+                const cx = rect.left + rect.width / 2;
+                const cy = rect.top + rect.height / 2;
+                const dx = e.clientX - cx;
+                const dy = e.clientY - cy;
+                const dist = Math.sqrt(dx * dx + dy * dy);
+
+                if (dist < RADIUS) {
+                const force = (1 - dist / RADIUS) * STRENGTH;
+                // tx 제거, ty는 항상 위쪽(음수)으로 고정
+                char.style.transform = `translateY(${-force}px)`;
+                } else {
+                char.style.transform = "translate(0, 0)";
+                }
+
+                });
+            });
+            </script>
+
+            <img class="moving-box" src="Group 27.png" style="margin-bottom: 100px;">
+            </div>
+    </section>
+
+
+    <section class="pic" style="color: white;">
+        <div class="bcontents center">
+            <h2 style="font-size: 2rem;">알고리즘에 매일같이 뜨는 똑같은 컨텐츠들</h2>
+        </div>
+    </section>
+
+
+    <section class="pic2" style="color: white;">
+        <div class="bcontents left">
+            <h2 style="font-size:4rem">지긋지긋한 똑같은 알고리즘</h2>
+            <p style="font-size: 2rem;">매일 보는 비슷한 컨텐츠, 이제는 질리지 않으신가요? </p>
+        </div>
+    </section>
+
+
+    <section style="background-color: rgb(0, 0, 0); color: white; padding: 300px;">
+        <div class="bcontents right">
+            <img src="question bitmap.png">
+            <img src="question bitmap.png">
+            <img src="question bitmap.png">
+            <h2 style="font-size: 4rem;">내 친구는 뭘 보고 살까?</h2>
+            <p style="font-size: 2rem;">내 친구들의 알고리즘, 궁금하지 않으셨나요?</p>
+            <p style="color: red; font-size: 100px;"><<아직 만들고 있습니다>></p>
+        </div>
+    </section>
+
+    <section style="background-color: rgb(255, 196, 196);">
+        <div class="contents center">
+            <p>그런 당신을 위해 소개합니다,</p>
+        </div>
+    </section>
+
+    <section style="background-color: rgb(198, 255, 196);">
+        <div class="contents center">
+            <p style="font-size: 10rem; line-height: 150px;" class="font">CUSTOM ALGORITHM
+            </p>
+        </div>
+    </section>
+
+    <section style="background-color: rgb(196, 232, 255);">
+        <div class="contents center">
+            <h2>몇번의 클릭으로 당신이 원하는
+                <br> '새로운 나'를 만들어보세요 </h2>
+            <p>국가, 종교, 성별, 나이, 관심사, 무엇이든 자유롭게 커스텀 해보세요</p>
+        </div>
+    </section>
+
+    <section style="background-color: rgb(196, 232, 255);">
+        <div class="contents center">
+            <h2>나의 알고리즘을 공유하세요!</h2>
+        </div>
+    </section>
+    
+    <section style="background-color: rgb(196, 232, 255);">
+        <div class="contents left">
+            <p>계정 설정에서 알고리즘 공개 범위를 설정하세요</p>
+        </div>
+
+    </section>
+        <section style="background-color: rgb(196, 232, 255);">
+        <div class="contents left">
+            <p>친구들을 팔로우하고 그들의 알고리즘을 구경해보세요</p>
+        </div>
+    </section>
+
+    <section style="background-color: rgb(196, 232, 255);">
+        <div class="contents center">
+            <h2>이 사람은 무슨 생각하고 살까?</h2>
+            <p>친구는 물론, 머릿속이 궁금했던 유명인들의 
+                <br>알고리즘도 살펴볼 수 있습니다!
+            </p>
+            <p><s>유명인의 계정 공개 설정에 한합니다</s></p>
+        </div>
+    </section>
+
+
+    <section style="background-color: rgb(236, 235, 229);">
+        <div class="contents left">
+            <h2>이 모든 것이 가능한 이유</h2>
+            <p>저희만의 특화된 알고리즘 역공학 기술을 사용합니다.
+                <br>알고리즘을 역으로 시스템에 먹이는 방식입니다
+            </p>
+            <video class="video" src="eating.mp4" autoplay muted loop ></video>
+        </div>
+    </section>
+
+    <section style="background-color: rgb(196, 232, 255);">
+        <div class="contents center">
+            <h2>새로운 알고리즘과 함께 
+                <br>새로운 세상에 빠져보세요</h2>
+        </div>
+    </section>
+
+    <section style="background-color: rgb(196, 232, 255);">
+        <div class="contents center">
+            <h2>pricing</h2>
+            <p>Free</p>
+            <p>pro</p>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <section style="background-color: rgb(213, 213, 213);">
+            <div>
+                <h2>CA Company</h2>
+                <p>Account</p>
+                <p>Manage Your Account</p>
+                <p>CA Account</p>
+            </div>
+        </section>
+    </footer>
+
+
+</body>
+</html>
